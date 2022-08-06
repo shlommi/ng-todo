@@ -9,5 +9,14 @@
     <div class="todo-container">
       <app-todo></app-todo>
     </div>
+    <button
+      (click)="openDialog()"
+      class="add-new-todo-btn"
+      mat-fab
+      color="primary"
+      aria-label="button with a add icon"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
   </main>
 </div>
