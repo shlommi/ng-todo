@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ITodo } from '../models/todo.interface';
 
 @Injectable({
@@ -13,6 +13,7 @@ export class TodoService {
       isCompolited: true,
       isArchived: false,
       endDate: '7/29/2022',
+      selected: false,
     },
     {
       title: 'Tarantula, salmon pink bird eater',
@@ -20,6 +21,7 @@ export class TodoService {
       isCompolited: false,
       isArchived: true,
       endDate: '11/9/2021',
+      selected: true,
     },
     {
       title: 'Fringe-eared oryx',
@@ -27,6 +29,7 @@ export class TodoService {
       isCompolited: false,
       isArchived: true,
       endDate: '9/21/2021',
+      selected: true,
     },
     {
       title: 'Caiman, spectacled',
@@ -34,6 +37,7 @@ export class TodoService {
       isCompolited: false,
       isArchived: false,
       endDate: '8/21/2021',
+      selected: true,
     },
     {
       title: 'Owl, great horned',
@@ -41,35 +45,29 @@ export class TodoService {
       isCompolited: true,
       isArchived: false,
       endDate: '2/1/2022',
-    },
-    {
-      title: 'Red deer',
-      description: 'Cervus elaphus',
-      isCompolited: true,
-      isArchived: false,
-      endDate: '3/19/2022',
-    },
-    {
-      title: 'Wombat, southern hairy-nosed',
-      description: 'Lasiorhinus latifrons',
-      isCompolited: false,
-      isArchived: true,
-      endDate: '4/5/2022',
-    },
-    {
-      title: 'Brindled gnu',
-      description: 'Connochaetus taurinus',
-      isCompolited: true,
-      isArchived: true,
-      endDate: '12/22/2021',
+      selected: true,
     },
   ];
-  private _todoSubject: BehaviorSubject<Array<ITodo>> = new BehaviorSubject(
+
+  private _todosSubject: BehaviorSubject<Array<ITodo>> = new BehaviorSubject(
     this._mock
   );
+
+  private _singleTodo: BehaviorSubject<ITodo> = new BehaviorSubject(
+    this._mock[0]
+  );
+
   constructor() {}
 
   getTodos(): Observable<Array<ITodo>> {
-    return this._todoSubject.asObservable();
+    return this._todosSubject.asObservable();
+  }
+
+  getSelectedTodo(): Observable<ITodo> {
+    return this._singleTodo.asObservable();
+  }
+
+  setSelectedTodo(todo: ITodo) {
+    this._singleTodo.next(todo);
   }
 }

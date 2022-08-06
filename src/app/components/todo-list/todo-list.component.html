@@ -1,6 +1,6 @@
 <div class="todo-list">
-  <div class="item-wrapper" *ngFor="let item of todos">
-    <mat-card>
+  <div class="item-wrapper" *ngFor="let item of todos; let i = index">
+    <mat-card (click)="onTodoClick(item, i)">
       <mat-card-title>{{ item.title }}</mat-card-title>
       <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
     </mat-card>

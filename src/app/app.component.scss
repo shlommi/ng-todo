@@ -2,9 +2,15 @@
 } */
 main {
   padding: 10px;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 84px);
+  display: flex;
+  gap: 10px;
 }
 
 .list-container {
-  width: 25%;
+  flex: 1;
+}
+
+.todo-container {
+  flex: 3;
 }
