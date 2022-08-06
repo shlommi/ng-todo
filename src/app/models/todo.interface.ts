@@ -1,7 +1,8 @@
 export interface ITodo {
+  id: number;
   title: string;
   description: string;
-  isCompolited: boolean;
+  isCompleted: boolean;
   isArchived: boolean;
   endDate: Date | number | string;
   selected: boolean;

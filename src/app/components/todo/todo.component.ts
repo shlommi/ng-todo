@@ -10,6 +10,7 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class TodoComponent implements OnInit, OnDestroy {
   todo: ITodo | undefined;
+
   private _subscription: Subscription = new Subscription();
 
   constructor(private todoService: TodoService) {}
@@ -24,5 +25,15 @@ export class TodoComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._subscription.unsubscribe();
+  }
+
+  onCompleteTodo(todo: ITodo): void {
+    todo.isCompleted = true;
+  }
+
+  onArchivedTodo(): void {
+    if (this.todo) {
+      this.todo.isArchived = true;
+    }
   }
 }
