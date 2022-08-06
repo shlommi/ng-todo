@@ -1,22 +1,6 @@
 <div class="myapp">
   <app-header></app-header>
   <main>
-    <!-- left section -->
-    <div class="list-container">
-      <app-todo-list></app-todo-list>
-    </div>
-    <!-- right section -->
-    <div class="todo-container">
-      <app-todo></app-todo>
-    </div>
-    <button
-      (click)="openDialog()"
-      class="add-new-todo-btn"
-      mat-fab
-      color="primary"
-      aria-label="button with a add icon"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
+    <app-todo-container></app-todo-container>
   </main>
 </div>

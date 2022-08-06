@@ -1,0 +1,19 @@
+<!-- left section -->
+<div class="todos-container">
+  <div class="list-container">
+    <app-todo-list [todos]="todos"></app-todo-list>
+  </div>
+  <!-- right section -->
+  <div class="todo-container">
+    <app-todo [todo]="todo"></app-todo>
+  </div>
+  <button
+    (click)="openDialog()"
+    class="add-new-todo-btn"
+    mat-fab
+    color="primary"
+    aria-label="button with a add icon"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
