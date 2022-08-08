@@ -6,60 +6,14 @@ import { ITodo } from '../models/todo.interface';
   providedIn: 'root',
 })
 export class TodoService {
-  private _mock: ITodo[] = [
-    {
-      id: 1,
-      title: 'Cattle egret',
-      description: 'Bubulcus ibis',
-      isCompleted: false,
-      isArchived: false,
-      endDate: '7/29/2022',
-      selected: true,
-    },
-    {
-      id: 2,
-      title: 'Tarantula, salmon pink bird eater',
-      description: 'Lasiodora parahybana',
-      isCompleted: false,
-      isArchived: false,
-      endDate: '11/9/2021',
-      selected: false,
-    },
-    {
-      id: 3,
-      title: 'Fringe-eared oryx',
-      description: 'Oryx gazella callotis',
-      isCompleted: false,
-      isArchived: false,
-      endDate: '9/21/2021',
-      selected: false,
-    },
-    {
-      id: 4,
-      title: 'Caiman, spectacled',
-      description: 'Caiman crocodilus',
-      isCompleted: false,
-      isArchived: false,
-      endDate: '8/21/2021',
-      selected: false,
-    },
-    {
-      id: 5,
-      title: 'Owl, great horned',
-      description: 'Bubo virginianus',
-      isCompleted: false,
-      isArchived: false,
-      endDate: '2/1/2022',
-      selected: false,
-    },
-  ];
+  private _todos: ITodo[] = [];
 
   private _todosSubject: BehaviorSubject<Array<ITodo>> = new BehaviorSubject(
-    this._mock
+    this._todos
   );
 
   private _singleTodoSubject: BehaviorSubject<ITodo> = new BehaviorSubject(
-    this._mock[0]
+    this._todos[0]!
   );
 
   constructor() {}
@@ -74,5 +28,15 @@ export class TodoService {
 
   setSelectedTodo(todo: ITodo) {
     this._singleTodoSubject.next(todo);
+  }
+
+  addNewTodo(newTodo: ITodo): void {
+    // take  existing todos
+    // add new todo to the existing todo list
+    //trigger next  tic in observable
+
+    const existingTodoList: ITodo[] = this._todosSubject.value;
+    existingTodoList.push(newTodo);
+    this._todosSubject.next(existingTodoList);
   }
 }
