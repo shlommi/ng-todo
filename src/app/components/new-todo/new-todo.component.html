@@ -1,25 +1,41 @@
 <form #f="ngForm" (ngSubmit)="onNewTodoSubmit()" class="">
   <mat-form-field appearance="outline">
     <mat-label>Todo name</mat-label>
-    <input ngModel name="title" matInput placeholder="What is your task?" />
+    <input
+      required
+      ngModel
+      name="title"
+      matInput
+      placeholder="What is your task?"
+    />
+    <mat-error *ngIf="f.submitted && f.controls['title']?.invalid"
+      >Title is required</mat-error
+    >
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Todo Description</mat-label>
     <input
+      required
       ngModel
       name="description"
       matInput
       placeholder="What is your task?"
     />
+    <mat-error *ngIf="f.submitted && f.controls['description']?.invalid"
+      >Description is required</mat-error
+    >
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Choose a date</mat-label>
-    <input ngModel name="date" matInput [matDatepicker]="picker" />
+    <input required ngModel name="date" matInput [matDatepicker]="picker" />
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="f.submitted && f.controls['date']?.invalid"
+      >Date is required</mat-error
+    >
   </mat-form-field>
 
   <button type="submit" mat-raised-button color="primary">Submit</button>
