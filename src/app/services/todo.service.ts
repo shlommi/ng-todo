@@ -23,9 +23,9 @@ export class TodoService {
       const todosString = localStorage.getItem('todos');
       if (todosString) {
         const existingTodos: ITodo[] = JSON.parse(todosString);
-        existingTodos[0].selected = true;
         this._todosSubject.next(existingTodos);
         this._singleTodoSubject.next(existingTodos[0]);
+        existingTodos[0].selected = true;
       }
       //TODO: this should return something
     }
@@ -49,5 +49,20 @@ export class TodoService {
     this._todosSubject.next(existingTodoList);
     // set to local storage
     localStorage.setItem('todos', JSON.stringify(existingTodoList));
+  }
+
+  onTodoAction(todoID: string, action: string): void {
+    const currentTodoList: ITodo[] = this._todosSubject.value;
+    const currentTodoIndex: number = currentTodoList.findIndex(
+      (item) => item.id === todoID
+    );
+    const currentTodo = currentTodoList[currentTodoIndex];
+    if (action === 'isCompleted') {
+      currentTodo.isCompleted = true;
+    } else if (action === 'isArchived') {
+      currentTodo.isArchived = true;
+    }
+    this._todosSubject.next(currentTodoList);
+    localStorage.setItem('todos', JSON.stringify(currentTodoList));
   }
 }

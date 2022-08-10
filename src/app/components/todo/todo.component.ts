@@ -15,12 +15,10 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {}
 
   onCompleteTodo(todo: ITodo): void {
-    todo.isCompleted = true;
+    this.todoService.onTodoAction(todo.id, 'isCompleted');
   }
 
-  onArchivedTodo(): void {
-    if (this.todo) {
-      this.todo.isArchived = true;
-    }
+  onArchivedTodo(todo: ITodo): void {
+    this.todoService.onTodoAction(todo.id, 'isArchived');
   }
 }
