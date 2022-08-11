@@ -14,6 +14,8 @@ export class NewTodoComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private todoService: TodoService) {}
 
+  minDate: Date = new Date();
+
   ngOnInit(): void {}
 
   onNewTodoSubmit(): void {
